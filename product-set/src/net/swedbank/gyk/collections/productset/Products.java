@@ -40,17 +40,25 @@ public class Products {
 
     //implement this
     private void addProduct(String id, String name, LocalDateTime salesDate) {
+        Product newProduct = new Product(id, name, salesDate);
+        for (Product product : products) {
+            if (product.equals(newProduct)){
+                System.out.println("Product already exist.");
+                return;
+            }
+        }
+        products.add(newProduct);
     }
 
 
     //implement this
     public int numberOfProducts() {
-        return -1;
+        return products.size();
     }
 
     public void printAll() {
         for(Product product: products ) {
-            // implement printing here
+            System.out.println(product);
         }
     }
 

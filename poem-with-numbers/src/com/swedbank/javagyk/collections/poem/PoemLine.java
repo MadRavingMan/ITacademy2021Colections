@@ -1,6 +1,6 @@
 package com.swedbank.javagyk.collections.poem;
 
-public class PoemLine {
+public class PoemLine implements Comparable<PoemLine> {
 
     private int number;
     private String text;
@@ -16,5 +16,11 @@ public class PoemLine {
 
     public String getText() {
         return text;
+    }
+
+
+    @Override
+    public int compareTo(PoemLine o) {
+        return Integer.compare(number, o.getNumber());
     }
 }

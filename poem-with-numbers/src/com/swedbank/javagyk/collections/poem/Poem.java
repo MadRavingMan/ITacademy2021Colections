@@ -46,6 +46,7 @@ public class Poem {
     private void sortLines() {
         Comparator<PoemLine> reverseLineComparator = new PoemLineReverseComparator();
         Collections.sort(poemLines, reverseLineComparator);
+        Collections.sort(poemLines);
     }
 
 }
