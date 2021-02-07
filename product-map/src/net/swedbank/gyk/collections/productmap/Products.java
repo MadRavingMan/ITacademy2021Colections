@@ -23,13 +23,13 @@ public class Products {
 
         try {
             productList = Reader.readProducts("products.json");
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             productList = Reader.readProducts("product-set/products.json");
         }
 
         Products products = new Products();
 
-        for(ProductItem item: productList) {
+        for (ProductItem item : productList) {
             products.addProduct(item.getId(), item.getName(), item.getSalesDate(), item.getAmount());
         }
 
@@ -41,20 +41,32 @@ public class Products {
 
     //implement this
     private void addProduct(String id, String name, LocalDateTime salesDate, double amount) {
+        Product newProduct = new Product(id, name);
+        if (productStatistics.containsKey(newProduct)) {
+            ProductStatistics existingProduct = productStatistics.get(newProduct);
+            existingProduct.updateSalesAmount(amount);
+            if (salesDate.isBefore(existingProduct.getFirstSaleOn())) {
+                existingProduct.updateFirstSalesDate(salesDate);
+            } else if (salesDate.isAfter(existingProduct.getLastSaleOn())) {
+                existingProduct.updateLastSalesDate(salesDate);
+            }
+        } else {
+            productStatistics.put(new Product(id, name), new ProductStatistics(salesDate, salesDate, amount));
+        }
     }
-
 
     //implement this
     public int numberOfProducts() {
-        return -1;
+        return productStatistics.size();
     }
 
     public void printAll() {
-        for(Map.Entry<Product, ProductStatistics> productEntry: productStatistics.entrySet()) {
+        for (Map.Entry<Product, ProductStatistics> productEntry : productStatistics.entrySet()) {
             Product product = productEntry.getKey();
             ProductStatistics stat = productEntry.getValue();
 
             // implement printing here
+            System.out.println(product + " " + stat);
         }
     }
 

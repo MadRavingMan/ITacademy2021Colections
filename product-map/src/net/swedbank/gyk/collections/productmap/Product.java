@@ -18,4 +18,11 @@ public class Product {
     return name;
   }
 
+  @Override
+  public String toString() {
+    return "Product{" +
+            "id='" + id + '\'' +
+            ", name='" + name + '\'' +
+            '}';
+  }
 }
