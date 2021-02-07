@@ -45,14 +45,12 @@ public class Products {
         if (productStatistics.containsKey(newProduct)) {
             ProductStatistics existingProduct = productStatistics.get(newProduct);
             existingProduct.updateSalesAmount(amount);
-            if (salesDate.isBefore(existingProduct.getFirstSaleOn())) {
-                existingProduct.updateFirstSalesDate(salesDate);
-            } else if (salesDate.isAfter(existingProduct.getLastSaleOn())) {
-                existingProduct.updateLastSalesDate(salesDate);
-            }
+            existingProduct.updateFirstSalesDate(salesDate);
+            existingProduct.updateLastSalesDate(salesDate);
         } else {
             productStatistics.put(new Product(id, name), new ProductStatistics(salesDate, salesDate, amount));
         }
+
     }
 
     //implement this

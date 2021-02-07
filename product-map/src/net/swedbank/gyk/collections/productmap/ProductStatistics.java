@@ -57,12 +57,12 @@ public class ProductStatistics {
 
     //implement this
     public void updateFirstSalesDate(LocalDateTime dt) {
-        firstSaleOn = dt;
+        firstSaleOn = getMinDate(firstSaleOn, dt);
     }
 
     //implement this
     public void updateLastSalesDate(LocalDateTime dt) {
-        lastSaleOn = dt;
+        lastSaleOn = getMaxDate(lastSaleOn, dt);
     }
 
     @Override
